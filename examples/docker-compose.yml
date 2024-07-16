@@ -19,8 +19,8 @@ services:
       - DEBUG=0
       - USE_LOCAL_CA=0
     ports:
-      - 80:80
-      - 443:443
+      - 8081:80
+      - 8443:443
     volumes:                                    # Storage can be either a
       - /share/Container/nginx/secrets:/etc/letsencrypt          # Docker managed volume (see list at the bottom)
       - /share/Container/nginx/user_conf.d:/etc/nginx/user_conf.d    # or a host mount with a relative or full path.
