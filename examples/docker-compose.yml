@@ -4,6 +4,7 @@ services:
   # 当前页的配置基于 qnap ts551 v5.x 版本系统的容器管理配置
   nginx:
     image: registry.dockermirror.com/jonasal/nginx-certbot:latest
+    container_name: nginx
     restart: unless-stopped
     environment:
       - CERTBOT_EMAIL=zptpower1@gmail.com
