@@ -1,19 +1,26 @@
 version: '3'
 
 services:
+  # 当前页的配置基于 qnap ts551 v5.x 版本系统的容器管理配置
   nginx:
-    image: jonasal/nginx-certbot:latest
+    image: registry.dockermirror.com/jonasal/nginx-certbot:latest
     restart: unless-stopped
     environment:
-      - CERTBOT_EMAIL
-    env_file:
-      - ./nginx-certbot.env
+      - CERTBOT_EMAIL=zptpower1@gmail.com
+      - DHPARAM_SIZE=2048
+      - ELLIPTIC_CURVE=secp256r1
+      - RENEWAL_INTERVAL=8d
+      - RSA_KEY_SIZE=2048
+      - STAGING=0
+      - USE_ECDSA=1
+      - CERTBOT_AUTHENTICATOR=webroot
+      - CERTBOT_DNS_PROPAGATION_SECONDS=""
+      - DEBUG=0
+      - USE_LOCAL_CA=0
     ports:
       - 80:80
       - 443:443
     volumes:                                    # Storage can be either a
-      - nginx_secrets:/etc/letsencrypt          # Docker managed volume (see list at the bottom)
-      - ./user_conf.d:/etc/nginx/user_conf.d    # or a host mount with a relative or full path.
+      - /share/Container/nginx/secrets:/etc/letsencrypt          # Docker managed volume (see list at the bottom)
+      - /share/Container/nginx/user_conf.d:/etc/nginx/user_conf.d    # or a host mount with a relative or full path.
 
-volumes:
-  nginx_secrets:
