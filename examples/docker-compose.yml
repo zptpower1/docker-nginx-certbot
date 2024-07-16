@@ -2,6 +2,7 @@ version: '3'
 
 services:
   # 当前页的配置基于 qnap ts551 v5.x 版本系统的容器管理配置
+  # 因家庭宽带默认会被运营商封禁 80 和 443 端口，估该容器在 nas 中无法实现 ssl 的认证，不建议在家庭宽带环境中使用
   nginx:
     image: registry.dockermirror.com/jonasal/nginx-certbot:latest
     container_name: nginx
